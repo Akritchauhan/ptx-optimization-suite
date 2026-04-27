@@ -1,0 +1,44 @@
+﻿[       OK ] ParserTest.EmptyModule
+[       OK ] ParserTest.GlobalDirectives
+[  FAILED  ] ParserTest.SimpleFunction
+.\build\ptxc_tests.exe
+ :   ParserTest.Simple
+Function failed: EXPEC
+T_FALSE(parser.hasErro
+rs()) failed
+At line:1 char:1
++ .\build\ptxc_tests.e
+xe 2>&1 | Out-File 
+-Encoding utf8 
+full_test_log.t ...
++ ~~~~~~~~~~~~~~~~~~~~
+~~~~~~~
+    + CategoryInfo    
+          : NotSpeci  
+  fied: (  ParserTe   
+ st.Si...rrors())     
+failed:String) []    
+, RemoteException
+    + FullyQualifiedE 
+   rrorId : NativeCo  
+  mmandError
+ 
+  ParserTest.SimpleFun
+ction failed: EXPECT_E
+Q(inst->opcode, 
+"ret") failed
+  ParserTest.Instructi
+onWithOperands 
+failed: EXPECT_FALSE(p
+arser.hasErrors()) 
+failed
+  ParserTest.Instructi
+onWithOperands 
+failed: EXPECT_EQ(inst
+->opcode, "add.s32") 
+failed
+  ParserTest.Instructi
+onWithOperands 
+failed: EXPECT_GE(inst
+->operands.size(), 
+3u) failed

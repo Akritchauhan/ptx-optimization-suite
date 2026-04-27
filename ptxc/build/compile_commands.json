@@ -1,0 +1,44 @@
+[
+{
+  "directory": "D:/PTX_Compiler/ptxc/build",
+  "command": "C:\\MinGW\\bin\\c++.exe  @CMakeFiles/ptxc_lib.dir/includes_CXX.rsp -std=gnu++1z -Wall -Wextra -Wshadow -Wno-unused-parameter -o CMakeFiles\\ptxc_lib.dir\\src\\lexer\\Lexer.cpp.obj -c D:\\PTX_Compiler\\ptxc\\src\\lexer\\Lexer.cpp",
+  "file": "D:/PTX_Compiler/ptxc/src/lexer/Lexer.cpp",
+  "output": "CMakeFiles/ptxc_lib.dir/src/lexer/Lexer.cpp.obj"
+},
+{
+  "directory": "D:/PTX_Compiler/ptxc/build",
+  "command": "C:\\MinGW\\bin\\c++.exe  @CMakeFiles/ptxc_lib.dir/includes_CXX.rsp -std=gnu++1z -Wall -Wextra -Wshadow -Wno-unused-parameter -o CMakeFiles\\ptxc_lib.dir\\src\\lexer\\Token.cpp.obj -c D:\\PTX_Compiler\\ptxc\\src\\lexer\\Token.cpp",
+  "file": "D:/PTX_Compiler/ptxc/src/lexer/Token.cpp",
+  "output": "CMakeFiles/ptxc_lib.dir/src/lexer/Token.cpp.obj"
+},
+{
+  "directory": "D:/PTX_Compiler/ptxc/build",
+  "command": "C:\\MinGW\\bin\\c++.exe  @CMakeFiles/ptxc_lib.dir/includes_CXX.rsp -std=gnu++1z -Wall -Wextra -Wshadow -Wno-unused-parameter -o CMakeFiles\\ptxc_lib.dir\\src\\parser\\Parser.cpp.obj -c D:\\PTX_Compiler\\ptxc\\src\\parser\\Parser.cpp",
+  "file": "D:/PTX_Compiler/ptxc/src/parser/Parser.cpp",
+  "output": "CMakeFiles/ptxc_lib.dir/src/parser/Parser.cpp.obj"
+},
+{
+  "directory": "D:/PTX_Compiler/ptxc/build",
+  "command": "C:\\MinGW\\bin\\c++.exe  @CMakeFiles/ptxc.dir/includes_CXX.rsp -std=gnu++1z -Wall -Wextra -Wshadow -Wno-unused-parameter -o CMakeFiles\\ptxc.dir\\tools\\ptxc\\main.cpp.obj -c D:\\PTX_Compiler\\ptxc\\tools\\ptxc\\main.cpp",
+  "file": "D:/PTX_Compiler/ptxc/tools/ptxc/main.cpp",
+  "output": "CMakeFiles/ptxc.dir/tools/ptxc/main.cpp.obj"
+},
+{
+  "directory": "D:/PTX_Compiler/ptxc/build",
+  "command": "C:\\MinGW\\bin\\c++.exe  @CMakeFiles/ptxc_tests.dir/includes_CXX.rsp -std=gnu++1z -Wall -Wextra -Wshadow -Wno-unused-parameter -o CMakeFiles\\ptxc_tests.dir\\test\\test_main.cpp.obj -c D:\\PTX_Compiler\\ptxc\\test\\test_main.cpp",
+  "file": "D:/PTX_Compiler/ptxc/test/test_main.cpp",
+  "output": "CMakeFiles/ptxc_tests.dir/test/test_main.cpp.obj"
+},
+{
+  "directory": "D:/PTX_Compiler/ptxc/build",
+  "command": "C:\\MinGW\\bin\\c++.exe  @CMakeFiles/ptxc_tests.dir/includes_CXX.rsp -std=gnu++1z -Wall -Wextra -Wshadow -Wno-unused-parameter -o CMakeFiles\\ptxc_tests.dir\\test\\unit\\test_lexer.cpp.obj -c D:\\PTX_Compiler\\ptxc\\test\\unit\\test_lexer.cpp",
+  "file": "D:/PTX_Compiler/ptxc/test/unit/test_lexer.cpp",
+  "output": "CMakeFiles/ptxc_tests.dir/test/unit/test_lexer.cpp.obj"
+},
+{
+  "directory": "D:/PTX_Compiler/ptxc/build",
+  "command": "C:\\MinGW\\bin\\c++.exe  @CMakeFiles/ptxc_tests.dir/includes_CXX.rsp -std=gnu++1z -Wall -Wextra -Wshadow -Wno-unused-parameter -o CMakeFiles\\ptxc_tests.dir\\test\\unit\\test_parser.cpp.obj -c D:\\PTX_Compiler\\ptxc\\test\\unit\\test_parser.cpp",
+  "file": "D:/PTX_Compiler/ptxc/test/unit/test_parser.cpp",
+  "output": "CMakeFiles/ptxc_tests.dir/test/unit/test_parser.cpp.obj"
+}
+]

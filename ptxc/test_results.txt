@@ -1,0 +1,74 @@
+[       OK ] ParserTest.EmptyModule
+[       OK ] ParserTest.GlobalDirectives
+[       OK ] ParserTest.SimpleFunction
+[       OK ] ParserTest.InstructionWithoperandList
+[       OK ] ParserTest.PredicatedInstruction
+[       OK ] ParserTest.AddressingModes
+[       OK ] ParserTest.RegisterDeclaration
+[       OK ] LexerTest.EmptyInput
+[       OK ] LexerTest.WhitespaceOnly
+[       OK ] LexerTest.LineComment
+[       OK ] LexerTest.BlockComment
+  LexerTest.UnterminatedBlockComment failed: EXPECT_FALSE(lex.errors().empty()) failed
+[  FAILED  ] LexerTest.UnterminatedBlockComment
+[       OK ] LexerTest.Directives
+[       OK ] LexerTest.TypeModifiers
+  LexerTest.RoundingModifiers failed: EXPECT_EQ(tokens[0].kind, ptxc::TokenKind::DotLo) failed: [Identifier] != [.lo]
+  LexerTest.RoundingModifiers failed: EXPECT_EQ(tokens[1].kind, ptxc::TokenKind::DotHi) failed: [Identifier] != [.hi]
+  LexerTest.RoundingModifiers failed: EXPECT_EQ(tokens[2].kind, ptxc::TokenKind::DotRn) failed: [Identifier] != [.rn]
+  LexerTest.RoundingModifiers failed: EXPECT_EQ(tokens[3].kind, ptxc::TokenKind::DotRz) failed: [Identifier] != [.rz]
+  LexerTest.RoundingModifiers failed: EXPECT_EQ(tokens[4].kind, ptxc::TokenKind::DotRm) failed: [Identifier] != [.rm]
+  LexerTest.RoundingModifiers failed: EXPECT_EQ(tokens[5].kind, ptxc::TokenKind::DotRp) failed: [Identifier] != [.rp]
+  LexerTest.RoundingModifiers failed: EXPECT_EQ(tokens[6].kind, ptxc::TokenKind::DotWide) failed: [Identifier] != [.wide]
+[  FAILED  ] LexerTest.RoundingModifiers
+[       OK ] LexerTest.ComparisonModifiers
+  LexerTest.Opcodes failed: EXPECT_EQ(tokens[4].kind, ptxc::TokenKind::OpFma) failed: [Identifier] != [unknown]
+  LexerTest.Opcodes failed: EXPECT_EQ(tokens[8].kind, ptxc::TokenKind::OpCvt) failed: [Identifier] != [unknown]
+  LexerTest.Opcodes failed: EXPECT_EQ(tokens[13].kind, ptxc::TokenKind::OpSelp) failed: [Identifier] != [unknown]
+[  FAILED  ] LexerTest.Opcodes
+  LexerTest.AdditionalOpcodes failed: EXPECT_EQ(tokens[0].kind, ptxc::TokenKind::OpShl) failed: [Identifier] != [unknown]
+  LexerTest.AdditionalOpcodes failed: EXPECT_EQ(tokens[1].kind, ptxc::TokenKind::OpShr) failed: [Identifier] != [unknown]
+  LexerTest.AdditionalOpcodes failed: EXPECT_EQ(tokens[2].kind, ptxc::TokenKind::OpAnd) failed: [Identifier] != [unknown]
+  LexerTest.AdditionalOpcodes failed: EXPECT_EQ(tokens[3].kind, ptxc::TokenKind::OpOr) failed: [Identifier] != [unknown]
+  LexerTest.AdditionalOpcodes failed: EXPECT_EQ(tokens[4].kind, ptxc::TokenKind::OpXor) failed: [Identifier] != [unknown]
+  LexerTest.AdditionalOpcodes failed: EXPECT_EQ(tokens[5].kind, ptxc::TokenKind::OpNot) failed: [Identifier] != [unknown]
+  LexerTest.AdditionalOpcodes failed: EXPECT_EQ(tokens[6].kind, ptxc::TokenKind::OpBar) failed: [Identifier] != [unknown]
+  LexerTest.AdditionalOpcodes failed: EXPECT_EQ(tokens[8].kind, ptxc::TokenKind::OpDiv) failed: [Identifier] != [unknown]
+  LexerTest.AdditionalOpcodes failed: EXPECT_EQ(tokens[9].kind, ptxc::TokenKind::OpRem) failed: [Identifier] != [unknown]
+[  FAILED  ] LexerTest.AdditionalOpcodes
+[       OK ] LexerTest.GeneralRegisters
+  LexerTest.SpecialRegisters failed: EXPECT_EQ(tokens[0].kind, ptxc::TokenKind::SpecialReg) failed: [Register] != [SpecialReg]
+  LexerTest.SpecialRegisters failed: EXPECT_EQ(tokens[1].kind, ptxc::TokenKind::SpecialReg) failed: [Register] != [SpecialReg]
+  LexerTest.SpecialRegisters failed: EXPECT_EQ(tokens[2].kind, ptxc::TokenKind::SpecialReg) failed: [Register] != [SpecialReg]
+  LexerTest.SpecialRegisters failed: EXPECT_EQ(tokens[3].kind, ptxc::TokenKind::SpecialReg) failed: [Register] != [SpecialReg]
+  LexerTest.SpecialRegisters failed: EXPECT_EQ(tokens[4].kind, ptxc::TokenKind::SpecialReg) failed: [Register] != [SpecialReg]
+[  FAILED  ] LexerTest.SpecialRegisters
+[       OK ] LexerTest.IntegerLiterals
+  LexerTest.FloatLiterals failed: EXPECT_EQ(tokens[1].lexeme, "1.0e-5") failed: [1.0e] != [1.0e-5]
+  LexerTest.FloatLiterals failed: EXPECT_EQ(tokens[2].kind, ptxc::TokenKind::FloatLiteral) failed: [IntegerLiteral] != [FloatLiteral]
+  LexerTest.FloatLiterals failed: EXPECT_EQ(tokens[2].lexeme, "0F3f800000") failed: [-5] != [0F3f800000]
+  LexerTest.FloatLiterals failed: EXPECT_EQ(tokens[3].kind, ptxc::TokenKind::FloatLiteral) failed: [IntegerLiteral] != [FloatLiteral]
+  LexerTest.FloatLiterals failed: EXPECT_EQ(tokens[3].lexeme, "0D3ff0000000000000") failed: [0F3f800000] != [0D3ff0000000000000]
+[  FAILED  ] LexerTest.FloatLiterals
+[       OK ] LexerTest.NegativeNumbers
+[       OK ] LexerTest.Labels
+[       OK ] LexerTest.Punctuation
+[       OK ] LexerTest.SourceLocation
+[       OK ] LexerTest.PredicatedInstruction
+  LexerTest.ComplexInstruction failed: EXPECT_EQ(tokens[0].kind, ptxc::TokenKind::OpFma) failed: [Identifier] != [unknown]
+  LexerTest.ComplexInstruction failed: EXPECT_EQ(tokens[1].kind, ptxc::TokenKind::DotRn) failed: [Identifier] != [.rn]
+[  FAILED  ] LexerTest.ComplexInstruction
+  LexerTest.AddressExpression failed: EXPECT_EQ(tokens[1].kind, ptxc::TokenKind::DotGlobal) failed: [Identifier] != [unknown]
+[  FAILED  ] LexerTest.AddressExpression
+[       OK ] LexerTest.AddressWithOffset
+[       OK ] LexerTest.RegDeclaration
+[       OK ] TokenTest.ConvenienceMethods
+[       OK ] TokenTest.TypeModifierCheck
+  LexerTest.TokenizeSaxpyFixture failed: EXPECT_TRUE(hasFma) failed
+[  FAILED  ] LexerTest.TokenizeSaxpyFixture
+[       OK ] LexerTest.TokenizeGemmFixture
+[       OK ] LexerTest.TokenizeBranchHeavyFixture
+
+[==========] 36 tests ran.
+[  PASSED  ] 27 tests.
+[  FAILED  ] 9 tests.

@@ -1,0 +1,41 @@
+﻿
+Source: .visible .entry my_kernel() { ret; }
+Tokens:
+  .visible '.visible'
+  .entry '.entry'
+  Identifier 'my_kernel'
+  ( '('
+  ) ')'
+  { '{'
+  ret 'ret'
+  ; ';'
+  } '}'
+  Eof ''
+Parser Errors:
+  debug.ptx:1:37: error: Expected ';' after instruction at end of file
+  debug.ptx:1:37: error: Expected '}' after function body at end of file
+Function: 'my_kernel'
+  Inst: opcode='ret;}' operands=0
+
+Source: .entry k() { add.s32 %r1, %r2, 42; }
+Tokens:
+  .entry '.entry'
+  Identifier 'k'
+  ( '('
+  ) ')'
+  { '{'
+  add 'add'
+  .s32 '.s32'
+  Register '%r1'
+  , ','
+  Register '%r2'
+  , ','
+  IntegerLiteral '42'
+  ; ';'
+  } '}'
+  Eof ''
+Parser Errors:
+  debug.ptx:1:37: error: Expected ';' after instruction at end of file
+  debug.ptx:1:37: error: Expected '}' after function body at end of file
+Function: 'k'
+  Inst: opcode='add.s32%r1,%r2,42;}' operands=0

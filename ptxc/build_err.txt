@@ -1,0 +1,10 @@
+libptxc_lib.a(Lexer.cpp.obj):Lexer.cpp:(.text+0xaa): undefined reference to `ptxc::Lexer::isAtEnd() const'
+libptxc_lib.a(Lexer.cpp.obj):Lexer.cpp:(.text+0x172): undefined reference to `ptxc::Lexer::isAtEnd() const'
+libptxc_lib.a(Lexer.cpp.obj):Lexer.cpp:(.text+0x894): undefined reference to `ptxc::Lexer::isAtEnd() const'
+libptxc_lib.a(Lexer.cpp.obj):Lexer.cpp:(.text+0x10b7): undefined reference to `ptxc::Lexer::isAtEnd() const'
+libptxc_lib.a(Lexer.cpp.obj):Lexer.cpp:(.text+0x11a5): undefined reference to `ptxc::Lexer::isAtEnd() const'
+libptxc_lib.a(Lexer.cpp.obj):Lexer.cpp:(.text+0x1205): more undefined references to `ptxc::Lexer::isAtEnd() const' follow
+collect2.exe: error: ld returned 1 exit status
+mingw32-make[2]: *** [ptxc_tests.exe] Error 1
+mingw32-make[1]: *** [CMakeFiles/ptxc_tests.dir/all] Error 2
+mingw32-make: *** [all] Error 2

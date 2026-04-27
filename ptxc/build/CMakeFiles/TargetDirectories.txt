@@ -1,0 +1,6 @@
+D:/PTX_Compiler/ptxc/build/CMakeFiles/ptxc_lib.dir
+D:/PTX_Compiler/ptxc/build/CMakeFiles/ptxc.dir
+D:/PTX_Compiler/ptxc/build/CMakeFiles/ptxc_tests.dir
+D:/PTX_Compiler/ptxc/build/CMakeFiles/test.dir
+D:/PTX_Compiler/ptxc/build/CMakeFiles/edit_cache.dir
+D:/PTX_Compiler/ptxc/build/CMakeFiles/rebuild_cache.dir

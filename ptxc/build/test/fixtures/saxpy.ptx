@@ -1,0 +1,72 @@
+//
+// saxpy.ptx — SAXPY kernel: y[i] = alpha * x[i] + y[i]
+//
+// Intentionally includes:
+//   - Dead code (add result never used)
+//   - Foldable constants (mul by 1, add 0)
+//   - Loop with bra, setp, ld.global, st.global, fma.rn.f32
+//
+
+.version 8.0
+.target sm_80
+.address_size 64
+
+.visible .entry saxpy(
+    .param .f32 alpha,
+    .param .u64 x_ptr,
+    .param .u64 y_ptr,
+    .param .u32 N
+)
+{
+    .reg .f32   %f<16>;
+    .reg .u32   %r<16>;
+    .reg .u64   %rd<16>;
+    .reg .pred  %p<4>;
+
+    // Load parameters
+    ld.param.f32    %f0, [alpha];
+    ld.param.u64    %rd0, [x_ptr];
+    ld.param.u64    %rd1, [y_ptr];
+    ld.param.u32    %r0, [N];
+
+    // Compute global thread ID: tid.x + ctaid.x * ntid.x
+    mov.u32         %r1, %tid.x;
+    mov.u32         %r2, %ctaid.x;
+    mov.u32         %r3, %ntid.x;
+    mad.lo.u32      %r4, %r2, %r3, %r1;
+
+    // Bounds check: if (tid >= N) goto done
+    setp.ge.u32     %p0, %r4, %r0;
+    @%p0 bra        done;
+
+    // ── Dead code: result never used ──
+    add.u32         %r10, %r4, %r4;
+    mul.lo.u32      %r11, %r10, 42;
+
+    // ── Foldable constant: multiply by 1.0 ──
+    mul.f32         %f10, %f0, 0F3f800000;    // %f0 * 1.0f → should fold away
+
+    // Compute byte offset: tid * 4
+    mul.lo.u32      %r5, %r4, 4;
+    cvt.u64.u32     %rd2, %r5;
+
+    // x_addr = x_ptr + offset
+    add.u64         %rd3, %rd0, %rd2;
+    ld.global.f32   %f1, [%rd3];
+
+    // y_addr = y_ptr + offset
+    add.u64         %rd4, %rd1, %rd2;
+    ld.global.f32   %f2, [%rd4];
+
+    // y[i] = alpha * x[i] + y[i]
+    fma.rn.f32      %f3, %f10, %f1, %f2;
+
+    // ── Foldable constant: add 0 ──
+    add.f32         %f4, %f3, 0F00000000;     // %f3 + 0.0f → should fold away
+
+    // Store result
+    st.global.f32   [%rd4], %f4;
+
+done:
+    ret;
+}

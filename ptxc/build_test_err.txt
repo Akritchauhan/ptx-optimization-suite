@@ -1,0 +1,4 @@
+test\unit\test_parser.cpp:1:24: fatal error: SimpleTest.h: No such file or directory
+ #include "SimpleTest.h"
+                        ^
+compilation terminated.

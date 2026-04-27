@@ -1,0 +1,2 @@
+C:\MinGW\bin\ar.exe qc libptxc_lib.a CMakeFiles/ptxc_lib.dir/src/lexer/Lexer.cpp.obj CMakeFiles/ptxc_lib.dir/src/lexer/Token.cpp.obj CMakeFiles/ptxc_lib.dir/src/parser/Parser.cpp.obj
+C:\MinGW\bin\ranlib.exe libptxc_lib.a

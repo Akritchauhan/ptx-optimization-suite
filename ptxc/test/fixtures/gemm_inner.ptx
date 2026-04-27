@@ -1,0 +1,128 @@
+//
+// gemm_inner.ptx — Inner loop of a GEMM kernel: C += A * B
+//
+// Includes:
+//   - Multiple fma.rn.f32 (CSE candidates with duplicate operands)
+//   - ld.shared / st.shared
+//   - bar.sync synchronization
+//   - 40+ instructions
+//
+
+.version 8.0
+.target sm_80
+.address_size 64
+
+.visible .entry gemm_inner(
+    .param .u64 A_ptr,
+    .param .u64 B_ptr,
+    .param .u64 C_ptr,
+    .param .u32 K,
+    .param .u32 lda,
+    .param .u32 ldb,
+    .param .u32 ldc
+)
+{
+    .reg .f32   %f<32>;
+    .reg .u32   %r<32>;
+    .reg .u64   %rd<32>;
+    .reg .pred  %p<4>;
+    .shared .f32 smemA[1024];
+    .shared .f32 smemB[1024];
+
+    // Load parameters
+    ld.param.u64    %rd0, [A_ptr];
+    ld.param.u64    %rd1, [B_ptr];
+    ld.param.u64    %rd2, [C_ptr];
+    ld.param.u32    %r0, [K];
+    ld.param.u32    %r1, [lda];
+    ld.param.u32    %r2, [ldb];
+    ld.param.u32    %r3, [ldc];
+
+    // Thread indices
+    mov.u32         %r4, %tid.x;
+    mov.u32         %r5, %tid.y;
+    mov.u32         %r6, %ctaid.x;
+    mov.u32         %r7, %ctaid.y;
+
+    // Accumulator registers (initialize to zero)
+    mov.f32         %f0, 0F00000000;
+    mov.f32         %f1, 0F00000000;
+    mov.f32         %f2, 0F00000000;
+    mov.f32         %f3, 0F00000000;
+
+    // Loop counter
+    mov.u32         %r8, 0;
+
+loop_start:
+    // Bounds check for k-loop
+    setp.ge.u32     %p0, %r8, %r0;
+    @%p0 bra        loop_end;
+
+    // Compute smem index for A tile
+    mul.lo.u32      %r9, %r5, 32;
+    add.u32         %r10, %r9, %r4;
+
+    // Load A tile element to shared memory
+    mul.lo.u32      %r11, %r8, 32;
+    add.u32         %r12, %r11, %r4;
+    mul.lo.u32      %r13, %r5, %r1;
+    add.u32         %r14, %r13, %r12;
+    cvt.u64.u32     %rd3, %r14;
+    mul.lo.u64      %rd4, %rd3, 4;
+    add.u64         %rd5, %rd0, %rd4;
+    ld.global.f32   %f4, [%rd5];
+    // st.shared — store into smemA
+    cvt.u64.u32     %rd6, %r10;
+    mul.lo.u64      %rd7, %rd6, 4;
+    st.shared.f32   [%rd7], %f4;
+
+    // Load B tile element to shared memory
+    mul.lo.u32      %r15, %r4, %r2;
+    add.u32         %r16, %r15, %r11;
+    add.u32         %r17, %r16, %r5;
+    cvt.u64.u32     %rd8, %r17;
+    mul.lo.u64      %rd9, %rd8, 4;
+    add.u64         %rd10, %rd1, %rd9;
+    ld.global.f32   %f5, [%rd10];
+    st.shared.f32   [%rd7], %f5;
+
+    // Synchronize
+    bar.sync        0;
+
+    // Inner product: unrolled 4 multiply-accumulate steps
+    // CSE candidates: some fma operations use same operands
+    ld.shared.f32   %f6, [%rd7];
+    ld.shared.f32   %f7, [%rd7];
+    fma.rn.f32      %f0, %f6, %f7, %f0;
+
+    ld.shared.f32   %f8, [%rd7];
+    ld.shared.f32   %f9, [%rd7];
+    fma.rn.f32      %f1, %f8, %f9, %f1;
+
+    // Duplicate fma — CSE should catch this  
+    fma.rn.f32      %f10, %f6, %f7, %f0;
+
+    ld.shared.f32   %f11, [%rd7];
+    ld.shared.f32   %f12, [%rd7];
+    fma.rn.f32      %f2, %f11, %f12, %f2;
+
+    fma.rn.f32      %f3, %f11, %f12, %f3;
+
+    // Synchronize again before next tile
+    bar.sync        0;
+
+    // Increment loop counter
+    add.u32         %r8, %r8, 1;
+    bra             loop_start;
+
+loop_end:
+    // Store results to global memory
+    mul.lo.u32      %r18, %r5, %r3;
+    add.u32         %r19, %r18, %r4;
+    cvt.u64.u32     %rd11, %r19;
+    mul.lo.u64      %rd12, %rd11, 4;
+    add.u64         %rd13, %rd2, %rd12;
+    st.global.f32   [%rd13], %f0;
+
+    ret;
+}

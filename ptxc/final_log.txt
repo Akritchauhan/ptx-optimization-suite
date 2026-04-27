@@ -1,0 +1,8 @@
+[       OK ] ParserTest.EmptyModule
+[       OK ] ParserTest.GlobalDirectives
+  ParserTest.SimpleFunction failed: EXPECT_FALSE(parser.hasErrors()) failed
+  ParserTest.SimpleFunction failed: EXPECT_EQ(inst->opcode, "ret") failed
+[  FAILED  ] ParserTest.SimpleFunction
+  ParserTest.InstructionWithOperands failed: EXPECT_FALSE(parser.hasErrors()) failed
+  ParserTest.InstructionWithOperands failed: EXPECT_EQ(inst->opcode, "add.s32") failed
+  ParserTest.InstructionWithOperands failed: EXPECT_GE(inst->operands.size(), 3u) failed
